@@ -16,7 +16,7 @@
 
 export PATH=~/bin:$PATH
 
-
+# start Xorg server using .xinit
 # [[ $(ps -e | grep startx) = '' ]] && startx
 
 
