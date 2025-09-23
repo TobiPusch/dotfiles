@@ -1,16 +1,5 @@
 /* See LICENSE file for copyright and license details. */
 
-#include <X11/XF86keysym.h>
-
-// function keys
-static const char *upvol[]   = { "pamixer", "-i", "5", NULL };
-static const char *downvol[] = { "pamixer", "-d", "5", NULL };
-static const char *mutevol[] = { "pamixer", "-t", NULL };
-static const char *brup[]    = { "brightnessctl", "set", "+10%", NULL };
-static const char *brdown[]  = { "brightnessctl", "set", "10%-", NULL };
-
-
-
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -22,18 +11,11 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const unsigned int baralpha = 0xd0;
-static const unsigned int borderalpha = OPAQUE;
+static const char col_cyan[]        = "#222222"; //statusbar non text color
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-};
-static const unsigned int alphas[][3]      = {
-    /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -117,13 +99,6 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-
- { 0,                            XF86XK_AudioLowerVolume,  spawn,          {.v = downvol } },
-    { 0,                            XF86XK_AudioRaiseVolume,  spawn,          {.v = upvol   } },
-    { 0,                            XF86XK_AudioMute,         spawn,          {.v = mutevol } },
-    { 0,                            XF86XK_MonBrightnessUp,   spawn,          {.v = brup    } },
-    { 0,                            XF86XK_MonBrightnessDown, spawn,          {.v = brdown  } },
-
 };
 
 /* button definitions */
@@ -142,7 +117,4 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
-
-
 
