@@ -1,5 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
+// function keys
+static const char *upvol[]   = { "pamixer", "-i", "5", NULL };
+static const char *downvol[] = { "pamixer", "-d", "5", NULL };
+static const char *mutevol[] = { "pamixer", "-t", NULL };
+static const char *brup[]    = { "brightnessctl", "set", "+10%", NULL };
+static const char *brdown[]  = { "brightnessctl", "set", "10%-", NULL };
+
+
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -106,6 +117,13 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+
+ { 0,                            XF86XK_AudioLowerVolume,  spawn,          {.v = downvol } },
+    { 0,                            XF86XK_AudioRaiseVolume,  spawn,          {.v = upvol   } },
+    { 0,                            XF86XK_AudioMute,         spawn,          {.v = mutevol } },
+    { 0,                            XF86XK_MonBrightnessUp,   spawn,          {.v = brup    } },
+    { 0,                            XF86XK_MonBrightnessDown, spawn,          {.v = brdown  } },
+
 };
 
 /* button definitions */
@@ -124,4 +142,7 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
+
+
 

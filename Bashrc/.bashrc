@@ -9,7 +9,8 @@ eval "$(starship init bash)"
 
 eval "$(zoxide init bash)"
 
-alias newpaper="feh --bg-scale --randomize ~/Dotfiles/Wallpaper/.config/wallpaper/Images/*"
+# nextPaper
+alias np="feh --bg-scale --randomize ~/Dotfiles/Wallpaper/.config/wallpaper/Images/*"
 alias ls='ls --color=auto'
 alias n='nvim'
 alias grep='grep --color=auto'
