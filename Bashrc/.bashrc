@@ -9,6 +9,7 @@ eval "$(starship init bash)"
 
 eval "$(zoxide init bash)"
 
+alias newpaper="feh --bg-scale --randomize ~/Dotfiles/Wallpaper/.config/wallpaper/Images/*"
 alias ls='ls --color=auto'
 alias n='nvim'
 alias grep='grep --color=auto'
@@ -16,9 +17,9 @@ PS1='[\u@\h \W]\$ '
 
 SCRIPT="$HOME/tmuxProgrammingSetup.sh"  # Pfad zum Skript anpassen
 
-if [[ -x "$SCRIPT" ]]; then
-    "$SCRIPT"
-fi
+#if [[ -x "$SCRIPT" ]]; then
+#    "$SCRIPT"
+#fi
 
 # Starte tmux automatisch, wenn es verfügbar ist und wir noch nicht in einer tmux-Session sind
 # if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ -n "$PS1" ]; then
