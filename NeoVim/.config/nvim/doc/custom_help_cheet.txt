@@ -1,0 +1,63 @@
+*ch*
+============================================================
+                 Neovim Keys Cheat Sheet
+============================================================
+
+Normal Mode
+------------------------------------------------------------
+K         -> Hover Popup (Info über Variable/Funktion/Struct) [LSP / lspsaga]
+gd        -> Gehe zur Definition [LSP / lspsaga]
+gr        -> Zeige Referenzen [LSP]
+gi        -> Gehe zur Implementierung [LSP]
+<C-o>     -> Springe zurück zur vorherigen Position
+<C-i>     -> Springe vorwärts (nach <C-o>)
+:TSUpdate -> Aktualisiert Treesitter Parser
+
+Navigation
+------------------------------------------------------------
+gg        -> Gehe zum Dateianfang
+G         -> Gehe zum Dateiende
+0         -> Anfang der Zeile
+$         -> Ende der Zeile
+w         -> Nächstes Wort
+b         -> Vorheriges Wort
+%         -> Springt zu passendem Klammerzeichen
+
+Editing
+------------------------------------------------------------
+i         -> Insert Mode
+a         -> Append Mode
+o         -> Neue Zeile unter der aktuellen
+O         -> Neue Zeile über der aktuellen
+dd        -> Lösche aktuelle Zeile
+yy        -> Kopiere aktuelle Zeile
+p         -> Einfügen nach Cursor
+u         -> Rückgängig
+<C-r>     -> Wiederherstellen
+
+Search
+------------------------------------------------------------
+/pattern  -> Suche nach 'pattern'
+n         -> Nächstes Suchergebnis
+N         -> Vorheriges Suchergebnis
+*         -> Suche Wort unter Cursor vorwärts
+#         -> Suche Wort unter Cursor rückwärts
+
+Buffers / Tabs
+------------------------------------------------------------
+:bn       -> Nächster Buffer
+:bp       -> Vorheriger Buffer
+:bd       -> Buffer schließen
+:tabnew   -> Neues Tab öffnen
+gt        -> Zum nächsten Tab
+gT        -> Zum vorherigen Tab
+
+Markdown Rendering
+------------------------------------------------------------
+:RenderMarkdown -> Rendert aktuelle Markdown Datei (render-markdown.nvim)
+
+Plugin Management
+------------------------------------------------------------
+:Lazy update          -> Alle Plugins aktualisieren
+:Lazy install <plugin> -> Einzelnes Plugin installieren
+

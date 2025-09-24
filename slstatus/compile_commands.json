@@ -1,0 +1,23 @@
+[
+  {
+    "arguments": [
+      "/usr/sbin/cc",
+      "-c",
+      "-I/usr/X11R6/include",
+      "-D_DEFAULT_SOURCE",
+      "-DVERSION=\"1.1\"",
+      "-std=c99",
+      "-pedantic",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-parameter",
+      "-Os",
+      "-o",
+      "slstatus.o",
+      "slstatus.c"
+    ],
+    "directory": "/home/tobi/Dotfiles/slstatus",
+    "file": "/home/tobi/Dotfiles/slstatus/slstatus.c",
+    "output": "/home/tobi/Dotfiles/slstatus/slstatus.o"
+  }
+]
