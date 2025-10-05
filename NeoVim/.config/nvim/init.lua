@@ -1,7 +1,15 @@
 require("config.lazy")
 
+
+vim.opt.clipboard = "unnamedplus"
+
 -- theme & transparency
-vim.cmd.colorscheme("default")
+--vim.cmd.colorscheme("tokyonight")
+--vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("gruvbox")
+--vim.cmd.colorscheme("default")
+
+
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
@@ -48,3 +56,6 @@ vim.opt.timeoutlen = 500                           -- Key timeout duration
 vim.opt.ttimeoutlen = 0                            -- Key code timeout
 vim.opt.autoread = true                            -- Auto reload files changed outside vim
 vim.opt.autowrite = false       
+
+
+
