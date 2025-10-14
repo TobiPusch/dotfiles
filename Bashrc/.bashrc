@@ -35,4 +35,4 @@ fi
 
 
 
-
+echo "type np to change wallpaper with feh"

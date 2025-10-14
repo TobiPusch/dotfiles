@@ -68,4 +68,10 @@ static const struct arg args[] = {
 	/* function format          argument */
 	{ datetime, "%s | ",           "%F %T" },
 { run_command, "VOL %s | ", "pamixer --get-volume-human" },
+{ run_command, "Bright: %s | ", "bash -c 'echo $(( $(brightnessctl g) * 100 / $(brightnessctl m) ))'" },
+{ battery_perc , "Bat: %s |", "BAT0" },
+{ battery_state , "B.Stat: %s |", "BAT0" },
+{ ram_perc, "Ram: %s% |", "" },
+{ cpu_perc, "CPU: %s% |", "" },
+
 };
