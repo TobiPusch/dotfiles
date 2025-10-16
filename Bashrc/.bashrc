@@ -18,11 +18,21 @@ fi
 
 
 # Aliases
-alias np="feh --bg-scale --randomize ~/Dotfiles/Wallpaper/.config/wallpaper/Images/*"
 alias ls='ls --color=auto'
 alias n='nvim'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
+
+
+
+CURRENT_HOST=$(hostnamectl --static)
+if [ "$CURRENT_HOST" = "archlinuxtobis-Arch" ]; then
+
+alias np="feh --bg-scale --randomize ~/dotfiles/Wallpaper/.config/wallpaper/Images/*"
+else
+
+alias np="feh --bg-scale --randomize ~/Dotfiles/Wallpaper/.config/wallpaper/Images/*"
+fi
 
 
 
@@ -45,4 +55,23 @@ fi
 
 
 
-echo "type np to change wallpaper with feh"
+# ---- Detect and export display variables ----
+if [ -n "$TMUX" ]; then
+  # Wenn Wayland läuft, aber Variable fehlt
+  if [ -z "$WAYLAND_DISPLAY" ] && [ -d "/run/user/$UID" ]; then
+    wayland_socket=$(ls /run/user/$UID | grep -E '^wayland-[0-9]+$' | head -n1)
+    if [ -n "$wayland_socket" ]; then
+      export WAYLAND_DISPLAY="$wayland_socket"
+      export XDG_RUNTIME_DIR="/run/user/$UID"
+    fi
+  fi
+
+  # Wenn kein Wayland, aber X11 läuft
+  if [ -z "$DISPLAY" ] && [ -S /tmp/.X11-unix/X0 ]; then
+    export DISPLAY=":0"
+    if [ -z "$XAUTHORITY" ] && [ -f "$HOME/.Xauthority" ]; then
+      export XAUTHORITY="$HOME/.Xauthority"
+    fi
+  fi
+fi
+# ---- End ----
