@@ -19,8 +19,16 @@ fi
 
 # Aliases
 alias ls='ls --color=auto'
-alias n='nvim'
+alias bright="sudo ddcutil"
+#sudo ddcutil --display 1 setvcp 10 50
+# setvcp code percent. 
+# code = 10 for Brightness
+# code = 12 for Kontrast
+# code = 16 for Red value
+# code = 18 for Green value
+# code = 1A for Blue value
 alias grep='grep --color=auto'
+alias blue="bluetoothctl"
 PS1='[\u@\h \W]\$ '
 
 
