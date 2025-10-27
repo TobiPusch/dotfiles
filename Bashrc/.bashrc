@@ -33,14 +33,6 @@ PS1='[\u@\h \W]\$ '
 
 
 
-CURRENT_HOST=$(hostnamectl --static)
-if [ "$CURRENT_HOST" = "archlinuxtobis-Arch" ]; then
-
-alias np="feh --bg-scale --randomize ~/dotfiles/Wallpaper/.config/wallpaper/Images/*"
-else
-
-alias np="feh --bg-scale --randomize ~/Dotfiles/Wallpaper/.config/wallpaper/Images/*"
-fi
 
 
 
@@ -62,11 +54,31 @@ if [ ! -n "$TMUX" ]; then
 fi
 
 
+# In ~/.bashrc
+if [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
+    alias np="~/.config/wallpaper/script/Random_Wallpaper.sh"
+    # hier Hyprland-spezifische Befehle
+elif [[ "$XDG_CURRENT_DESKTOP" == "dwm" || "$DESKTOP_SESSION" == "dwm" ]]; then
+    CURRENT_HOST=$(hostnamectl --static)
+	if [ "$CURRENT_HOST" = "archlinuxtobis-Arch" ]; then
+
+		alias np="feh --bg-scale --randomize ~/dotfiles/Wallpaper/.config/wallpaper/Images/*"
+	else
+
+		alias np="feh --bg-scale --randomize ~/Dotfiles/Wallpaper/.config/wallpaper/Images/*"
+	fi
+
+    # hier DWM-spezifische Befehle
+else
+    echo "Unbekannte Session: $XDG_CURRENT_DESKTOP"
+fi
+
 
 # ---- Detect and export display variables ----
 if [ -n "$TMUX" ]; then
   # Wenn Wayland läuft, aber Variable fehlt
   if [ -z "$WAYLAND_DISPLAY" ] && [ -d "/run/user/$UID" ]; then
+
     wayland_socket=$(ls /run/user/$UID | grep -E '^wayland-[0-9]+$' | head -n1)
     if [ -n "$wayland_socket" ]; then
       export WAYLAND_DISPLAY="$wayland_socket"
