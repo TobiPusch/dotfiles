@@ -2,51 +2,59 @@
 
 # --- Einstellungen ---
 WALLPAPER_DIR="$HOME/.config/wallpaper/Images"
-STATE_FILE="$HOME/.config/wallpaper/.last_image_index"
 
-# Aktuelles Wallpaper herausfinden
-CURRENT_WALL=$(hyprctl hyprpaper listloaded | awk '{print $2}' | head -n 1)
-CURRENT_BASENAME=$(basename "$CURRENT_WALL" 2>/dev/null)
-
-# --- Alle Bilder sammeln ---
+# --- Alle Bilder finden ---
+# Wir suchen nach jpg, jpeg und png
 readarray -t ALL_IMAGES < <(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
 
 # --- Auswahl-Logik ---
 if [ -n "$1" ]; then
-    # Automatisch bestes fuzzy match auswählen (ohne Menü)
-    SELECTED=$(printf "%s\n" "${ALL_IMAGES[@]}" | fzf --filter="$1" | head -n 1)
+    # FALL 1: Suchbegriff vorhanden
+    # Wir filtern mit fzf, nehmen aber aus den Treffern ein ZUFÄLLIGES (shuf -n 1)
+    SELECTED=$(printf "%s\n" "${ALL_IMAGES[@]}" | fzf --filter="$1" | shuf -n 1)
 else
-    # Keine Eingabe → zufälliges anderes Wallpaper
-    readarray -t MATCHES < <(find "$WALLPAPER_DIR" -type f ! -name "$CURRENT_BASENAME" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
-    NUM_MATCHES=${#MATCHES[@]}
+    # FALL 2: Keine Eingabe -> Komplett zufälliges Wallpaper
+    
+    # Aktuelles Wallpaper herausfinden (um es auszuschließen)
+    CURRENT_WALL=$(hyprctl hyprpaper listloaded | awk '{print $2}' | head -n 1)
+    CURRENT_BASENAME=$(basename "$CURRENT_WALL" 2>/dev/null)
 
-    if [ "$NUM_MATCHES" -eq 0 ]; then
-        echo "❌ Kein Wallpaper gefunden."
-        exit 1
-    fi
-
-    if [ -f "$STATE_FILE" ]; then
-        LAST_INDEX=$(cat "$STATE_FILE")
-    else
-        LAST_INDEX=-1
-    fi
-
-    NEXT_INDEX=$(( (LAST_INDEX + 1) % NUM_MATCHES ))
-    echo "$NEXT_INDEX" > "$STATE_FILE"
-    SELECTED="${MATCHES[$NEXT_INDEX]}"
+    # Suche alle Bilder, die NICHT das aktuelle sind, und wähle zufällig eins (shuf)
+    SELECTED=$(find "$WALLPAPER_DIR" -type f ! -name "$CURRENT_BASENAME" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)
 fi
 
+# --- Prüfen ob was gefunden wurde ---
 if [ -z "$SELECTED" ]; then
     echo "❌ Kein passendes Wallpaper gefunden."
     exit 1
 fi
 
-# Absoluten Pfad ermitteln
+# Absoluten Pfad sicherstellen
 SELECTED="$(realpath "$SELECTED")"
 
 echo "🖼️ Neues Wallpaper: ${SELECTED##*/}"
 
 # --- Anwenden ---
+# Hyprpaper Logik: Erst preloaden, dann setzen, dann alten unloaden (um Flackern zu minimieren)
+hyprctl hyprpaper preload "$SELECTED" > /dev/null 2>&1
+hyprctl hyprpaper wallpaper ",$SELECTED" > /dev/null 2>&1
+
+# Kleiner Workaround: Hyprpaper braucht kurz, bevor man das alte unloaden kann,
+# sonst wird das neue manchmal mit entfernt, wenn man sehr schnell switcht.
+# Da wir keine Loop mehr haben, ist 'unload all' am Ende okay, aber wir wollen das neue behalten.
+# Besser: Nur das alte unloaden, aber 'unload all' ist robuster gegen Speicherlecks.
+# Wir lassen unload all hier weg und verlassen uns darauf, dass beim nächsten Aufruf das 'alte' ja ersetzt wird.
+# Wenn du Speicher sparen willst, kannst du VOR dem preload 'unload all' machen (führt aber kurz zu schwarz/default).
+
+# Option A (Speicherschonend, kann kurz flackern):
+# hyprctl hyprpaper unload all > /dev/null 2>&1
+# hyprctl hyprpaper preload "$SELECTED" > /dev/null 2>&1
+# hyprctl hyprpaper wallpaper ",$SELECTED" > /dev/null 2>&1
+
+# Option B (Smoother Übergang, wir unloaden einfach alles was NICHT das neue ist):
+# (Das ist etwas komplexer in bash, daher bleiben wir bei deiner ursprünglichen Reihenfolge,
+# aber optimiert für Zufall)
+
 hyprctl hyprpaper unload all > /dev/null 2>&1
 hyprctl hyprpaper preload "$SELECTED" > /dev/null 2>&1
 hyprctl hyprpaper wallpaper ",$SELECTED" > /dev/null 2>&1
