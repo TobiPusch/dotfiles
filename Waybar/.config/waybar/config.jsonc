@@ -16,9 +16,9 @@
     ],
     "modules-right": [
 	    
-	"custom/wallpaper",
+	//"custom/wallpaper",
 "custom/audio-menu",
-//        "idle_inhibitor",
+        //"idle_inhibitor",
         "pulseaudio",
         "network",
         "power-profiles-daemon",
