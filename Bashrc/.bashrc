@@ -19,6 +19,7 @@ fi
 
 # Aliases
 alias ls='ls --color=auto'
+alias vlc='org.videolan.VLC'
 alias bright="sudo ddcutil"
 #sudo ddcutil --display 1 setvcp 10 50
 # setvcp code percent. 
@@ -95,7 +96,7 @@ if [ -n "$TMUX" ]; then
   fi
 fi
 # ---- End ----
-
+export PATH="$HOME/.cargo/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

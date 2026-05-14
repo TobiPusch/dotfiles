@@ -58,4 +58,3 @@ vim.opt.autoread = true                            -- Auto reload files changed 
 vim.opt.autowrite = false       
 
 
-

@@ -21,7 +21,11 @@ vim.opt.rtp:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- vim.g.maplocalleader = "\\"
+
+-- Keymaps
+-- Zeigt die Fehlermeldung unter dem Cursor an
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Show diagnostic error" })
 
 -- Setup lazy.nvim
 require("lazy").setup({
