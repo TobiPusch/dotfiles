@@ -21,9 +21,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 -- vim.g.maplocalleader = "\\"
 
--- Keymaps
--- Zeigt die Fehlermeldung unter dem Cursor an
-vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic error" })
 
 -- Setup lazy.nvim
 require("lazy").setup({

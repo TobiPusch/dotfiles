@@ -1,6 +1,12 @@
 require("config.lazy")
 
 
+-- Keymaps
+-- Zeigt die Fehlermeldung unter dem Cursor an
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic error" })
+vim.keymap.set("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree umschalten" })
+
+
 vim.opt.clipboard = "unnamedplus"
 
 -- theme & transparency
