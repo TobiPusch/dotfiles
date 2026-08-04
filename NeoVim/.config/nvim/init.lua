@@ -8,7 +8,11 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.code_action, { desc = "LSP Code Act
 vim.keymap.set("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree umschalten" })
 -- Ruft strg + n im insert mit Strg + Space auf was vervollständigung ist 
 vim.keymap.set("i", "<C-Space>", "<C-n>", { noremap = true})
-
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)          -- Dokumentation (Hover)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)    -- Zur Definition springen
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)   -- Zur Deklaration
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)-- Zu Implementierungen
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)    -- Alle Referenzen anzeigen
 -- theme & transparency
 --vim.cmd.colorscheme("tokyonight")
 --vim.cmd.colorscheme("catppuccin")
