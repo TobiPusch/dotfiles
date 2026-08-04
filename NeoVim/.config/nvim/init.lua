@@ -4,6 +4,7 @@ vim.opt.clipboard = "unnamedplus"
 -- Keymaps
 -- Zeigt die Fehlermeldung unter dem Cursor an
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic error" })
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 vim.keymap.set("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree umschalten" })
 -- Ruft strg + n im insert mit Strg + Space auf was vervollständigung ist 
 vim.keymap.set("i", "<C-Space>", "<C-n>", { noremap = true})
