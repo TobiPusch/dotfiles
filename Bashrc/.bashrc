@@ -100,3 +100,15 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+
+feh-show() {
+    # Wenn Argumente übergeben wurden (z.B. bestimmte Dateien), nutze diese.
+    # Ansonsten nimm standardmäßig alle .webp im aktuellen Ordner (sortiert).
+    if [ $# -gt 0 ]; then
+        printf '%s\n' "$@" | sort -V | xargs feh --image-bg black --auto-zoom -.
+    else
+        find . -maxdepth 1 -name "*.webp" | sort -V | xargs feh --image-bg black --auto-zoom -.
+    fi
+}
