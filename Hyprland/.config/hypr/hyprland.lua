@@ -242,6 +242,11 @@ hl.config({
             natural_scroll = true,
 	    disable_while_typing = false
         },
+touchdevice = {
+            enabled = true,
+            output  = "eDP-1", -- oder "DP-3", je nachdem wohin die Touch-Koordinaten sollen
+            transform = 0,
+        },
     },
 })
 
