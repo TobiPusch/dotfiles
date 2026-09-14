@@ -51,6 +51,14 @@ hl.monitor({ output = "HDMI-A-4", mode = "3840x2160@60",    position = "0x0",   
 hl.workspace_rule({ workspace = "1", monitor = "HDMI-A-4", default = true })
 hl.workspace_rule({ workspace = "5", monitor = "DP-3",     default = true })
 
+hl.window_rule({ name = "jotunnslayer-on-4k", match = { class = "^(jotunnslayer.exe)$" }, monitor = "HDMI-A-4" })
+hl.window_rule({ name = "shapez-on-4k",       match = { class = "^(shapezio.exe)$" },     monitor = "HDMI-A-4" })
+
+hl.window_rule({
+    name  = "windows-games-on-4k",
+    match = { class = "\\.exe$" },
+    monitor = "HDMI-A-4",
+})
 -- unscale XWayland
 hl.config({
     xwayland = {
@@ -192,7 +200,6 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "a
 --     border_size = 0,
 --     rounding    = 0,
 -- })
-
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {

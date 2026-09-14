@@ -21,6 +21,7 @@ fi
 alias ls='ls --color=auto'
 alias vlc='org.videolan.VLC'
 alias bright="sudo ddcutil"
+alias lsrg='ls | rg -i'
 #sudo ddcutil --display 1 setvcp 10 50
 # setvcp code percent. 
 # code = 10 for Brightness
