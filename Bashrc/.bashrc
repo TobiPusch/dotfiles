@@ -22,6 +22,8 @@ alias ls='ls --color=auto'
 alias vlc='org.videolan.VLC'
 alias bright="sudo ddcutil"
 alias lsrg='ls | rg -i'
+alias fda='fd -HI'
+alias bashrc='nvim ~/.bashrc'
 #sudo ddcutil --display 1 setvcp 10 50
 # setvcp code percent. 
 # code = 10 for Brightness
@@ -113,3 +115,4 @@ feh-show() {
         find . -maxdepth 1 -name "*.webp" | sort -V | xargs feh --image-bg black --auto-zoom -.
     fi
 }
+export PATH="$HOME/.local/bin:$PATH"
