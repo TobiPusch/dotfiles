@@ -36,7 +36,7 @@ echo "🖼️ Neues Wallpaper: ${SELECTED##*/}"
 
 # --- Anwenden ---
 # Hyprpaper Logik: Erst preloaden, dann setzen, dann alten unloaden (um Flackern zu minimieren)
-hyprctl hyprpaper preload "$SELECTED" > /dev/null 2>&1
+# hyprctl hyprpaper preload "$SELECTED" > /dev/null 2>&1
 hyprctl hyprpaper wallpaper ",$SELECTED" > /dev/null 2>&1
 
 # Kleiner Workaround: Hyprpaper braucht kurz, bevor man das alte unloaden kann,
