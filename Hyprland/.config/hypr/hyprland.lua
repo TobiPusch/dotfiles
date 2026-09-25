@@ -44,9 +44,9 @@ end
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({ output = "",       mode = "preferred",       position = "auto",    scale = 1.0 })
 hl.monitor({ output = "DP-3",     mode = "1920x1080@144",   position = "1920x0", scale = 1.2 })
-hl.monitor({ output = "HDMI-A-4", mode = "3840x2160@60",    position = "0x0",    scale = 2 })
 hl.monitor({ output = "HDMI-A-1", mode = "preferred",    position = "0x0",    scale = 2, mirror = "eDP-1"})
 -- hl.monitor({ output = "HDMI-A-1", mode = "preferred",    position = "0x0",    scale = 1})
+hl.monitor({ output = "HDMI-A-4", mode = "2560x1440@144",    position = "0x0",    scale = 1.33 })
 
 -- Zwingt Workspace 1 auf den Samsung (HDMI-A-4)
 -- default = true sorgt dafür, dass Hyprland beim Start diesen Monitor fokussiert
