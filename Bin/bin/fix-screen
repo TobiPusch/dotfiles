@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Workaround for amdgpu "flip_done timed out" CRTC hangs that strand one
+# monitor while Hyprland's IPC stays responsive (known open upstream bug,
+# see hyprwm/aquamarine#390 and omacom/omarchy#10852).
+set -euo pipefail
+
+monitor="${1:-DP-3}"
+
+echo "Toggling DPMS on $monitor ..."
+hyprctl -i 0 dispatch "hl.dsp.dpms({action=\"off\", monitor=\"$monitor\"})"
+sleep 2
+# The "on" call can itself time out at the IPC level even though the
+# display recovers a few seconds later — don't treat that as failure.
+hyprctl -i 0 dispatch "hl.dsp.dpms({action=\"on\", monitor=\"$monitor\"})" || true
+
+echo "Done. Give it a few seconds if the screen doesn't come back instantly."

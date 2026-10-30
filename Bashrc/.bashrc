@@ -34,6 +34,7 @@ alias bashrc='nvim ~/.bashrc'
 alias grep='grep --color=auto'
 alias blue="bluetoothctl"
 PS1='[\u@\h \W]\$ '
+alias fix-screen='bash bin/fix-screen'
 
 
 

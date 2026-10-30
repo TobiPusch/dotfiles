@@ -43,18 +43,20 @@ end
 ------------------
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({ output = "",       mode = "preferred",       position = "auto",    scale = 1.0 })
-hl.monitor({ output = "DP-3",     mode = "1920x1080@144",   position = "1920x0", scale = 1.2 })
-hl.monitor({ output = "HDMI-A-1", mode = "preferred",    position = "0x0",    scale = 2, mirror = "eDP-1"})
--- hl.monitor({ output = "HDMI-A-1", mode = "preferred",    position = "0x0",    scale = 1})
-hl.monitor({ output = "HDMI-A-4", mode = "2560x1440@144",    position = "0x0",    scale = 1.33 })
+hl.monitor({ output = "HDMI-A-4",     mode = "1920x1080@60",   position = "1920x0", scale = 1.2 })
+hl.monitor({ output = "DP-3", mode = "2560x1440@180",    position = "0x0",    scale = 1.33 })
+-- hl.monitor({ output = "DP-3",     mode = "1920x1080@144",   position = "1920x0", scale = 1.2 })
+-- hl.monitor({ output = "HDMI-A-4", mode = "2560x1440@180",    position = "0x0",    scale = 1.33 })
 
+-- hl.monitor({ output = "HDMI-A-1", mode = "preferred",    position = "0x0",    scale = 1})
+hl.monitor({ output = "HDMI-A-1", mode = "preferred",    position = "0x0",    scale = 2, mirror = "eDP-1"})
 -- Zwingt Workspace 1 auf den Samsung (HDMI-A-4)
 -- default = true sorgt dafür, dass Hyprland beim Start diesen Monitor fokussiert
-hl.workspace_rule({ workspace = "1", monitor = "HDMI-A-4", default = true })
-hl.workspace_rule({ workspace = "5", monitor = "DP-3",     default = true })
+hl.workspace_rule({ workspace = "5", monitor = "HDMI-A-4", default = true })
+hl.workspace_rule({ workspace = "1", monitor = "DP-3",     default = true })
 
-hl.window_rule({ name = "jotunnslayer-on-4k", match = { class = "^(jotunnslayer.exe)$" }, monitor = "HDMI-A-4" })
-hl.window_rule({ name = "shapez-on-4k",       match = { class = "^(shapezio.exe)$" },     monitor = "HDMI-A-4" })
+-- hl.window_rule({ name = "jotunnslayer-on-4k", match = { class = "^(jotunnslayer.exe)$" }, monitor = "HDMI-A-4" })
+-- hl.window_rule({ name = "shapez-on-4k",       match = { class = "^(shapezio.exe)$" },     monitor = "HDMI-A-4" })
 
 hl.window_rule({
     name  = "windows-games-on-4k",
@@ -79,6 +81,7 @@ hl.config({
 -- - hypridle
 -- - swaync
 local browser     = "app.zen_browser.zen"
+local browser_second     = "com.brave.Browser"
 local terminal    = "kitty"
 local fileManager = "dolphin"
 local menu        = "wofi --show drun --insensitive"
@@ -102,7 +105,7 @@ hl.on("hyprland.start", function()
 
     -- (ehemals weiter unten im File, siehe "WINDOWS AND WORKSPACES")
     hl.exec_cmd("sh -c 'command -v synology-drive >/dev/null 2>&1 && synology-drive'")
-    hl.exec_cmd("sleep 2 && xrandr --output HDMI-A-4 --primary")
+    -- hl.exec_cmd("sleep 2 && xrandr --output HDMI-A-4 --primary")
 end)
 
 -------------------------------
@@ -319,6 +322,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(browser_second))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
@@ -415,6 +419,8 @@ hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("cliphist list | wofi --dmenu
 hl.config({
     render = {
         direct_scanout = false,
+	cm_auto_hdr = 0,
+        direct_scanout = 0,
     },
 })
 
